@@ -71,29 +71,28 @@ public class Archivio {
 
 	public void caricaDaFile() throws IOException {
 		File storeFile = new File("archivio.txt");
-		this.archivio.clear();
 		String data = FileUtils.readFileToString(storeFile, "UTF-8");
 		String[] oggettiLeggibiliToString = data.split("#");
 
 		for (String str : oggettiLeggibiliToString) {
-			String[] objAttributes = str.split("@");
+			String[] objAttributi = str.split("@");
 
-			if (objAttributes.length == 6) {
-				UUID isbn = UUID.fromString(objAttributes[0]);
-				String titolo = objAttributes[1];
-				int annoPubblicazione = Integer.parseInt(objAttributes[2]);
-				int numeroPagine = Integer.parseInt(objAttributes[3]);
-				String autore = objAttributes[4];
-				String genere = objAttributes[5];
+			if (objAttributi.length == 6) {
+				UUID isbn = UUID.fromString(objAttributi[0]);
+				String titolo = objAttributi[1];
+				int annoPubblicazione = Integer.parseInt(objAttributi[2]);
+				int numeroPagine = Integer.parseInt(objAttributi[3]);
+				String autore = objAttributi[4];
+				String genere = objAttributi[5];
 
 				OggettiLeggibili obj = new Libro(isbn, titolo, autore, genere, annoPubblicazione, numeroPagine);
 				archivio.put(isbn, obj);
-			} else if (objAttributes.length == 5) {
-				UUID isbn = UUID.fromString(objAttributes[0]);
-				String titolo = objAttributes[1];
-				int annoPubblicazione = Integer.parseInt(objAttributes[2]);
-				int numeroPagine = Integer.parseInt(objAttributes[3]);
-				Rivista.Periodicita periodicita = Rivista.Periodicita.valueOf(objAttributes[4]);
+			} else if (objAttributi.length == 5) {
+				UUID isbn = UUID.fromString(objAttributi[0]);
+				String titolo = objAttributi[1];
+				int annoPubblicazione = Integer.parseInt(objAttributi[2]);
+				int numeroPagine = Integer.parseInt(objAttributi[3]);
+				Rivista.Periodicita periodicita = Rivista.Periodicita.valueOf(objAttributi[4]);
 
 				OggettiLeggibili obj = new Rivista(isbn, titolo, annoPubblicazione, numeroPagine, periodicita);
 				archivio.put(isbn, obj);
